@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kalkulator PPh by Adien</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #000000;
@@ -20,7 +20,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             height: 100vh;
@@ -29,9 +29,9 @@
             overflow: hidden;
         }
 
-        /* HEADER STYLE */
+        /* HEADER */
         header {
-            padding: 20px 24px;
+            padding: 24px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -43,23 +43,20 @@
             z-index: 100;
         }
 
-        .header-left {
-            display: flex;
-            flex-direction: column;
-        }
-
         .brand-title {
-            font-size: 14px;
+            font-size: 20px;
             font-weight: 800;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            line-height: 1.1;
         }
 
         .brand-sub {
             font-size: 10px;
             color: var(--text-dim);
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            margin-top: 2px;
         }
 
         /* DYNAMIC ISLAND */
@@ -67,7 +64,7 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            top: 15px;
+            top: 18px;
             z-index: 200;
         }
 
@@ -82,101 +79,75 @@
             color: white;
             font-size: 10px;
             font-weight: 700;
-            letter-spacing: 0.5px;
             border: 1px solid #333;
             transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-            cursor: default;
         }
 
-        .island-active {
-            width: 200px;
-            height: 38px;
-            background: #1c1c1e;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border-color: var(--accent-blue);
+        .island-active { width: 200px; height: 38px; border-color: var(--accent-blue); background: #1c1c1e; }
+
+        /* OVERLAYS & MODALS */
+        .overlay {
+            position: fixed; inset: 0;
+            background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(15px);
+            z-index: 9999; display: flex; align-items: center; justify-content: center;
+            transition: opacity 0.3s ease;
         }
 
-        /* MAIN CONTENT */
-        main {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+        .modal {
+            background: var(--card-color); padding: 30px; border-radius: 32px;
+            max-width: 400px; width: 85%; border: 1px solid var(--border);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5); text-align: center;
         }
+
+        .modal h2 {
+            font-size: 20px; margin-bottom: 12px; font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .modal p { color: var(--text-dim); line-height: 1.6; font-size: 14px; margin-bottom: 24px; text-align: left; }
+
+        .btn-prime {
+            width: 100%; padding: 16px; background: #ffffff; color: #000000;
+            border: none; border-radius: 100px; font-weight: 700; cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* MAIN UI */
+        main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; }
 
         .container {
-            background: var(--card-color);
-            padding: 32px;
-            border-radius: 40px;
-            width: 100%;
-            max-width: 420px;
-            max-height: 85vh;
-            border: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            position: relative;
+            background: var(--card-color); padding: 32px; border-radius: 40px;
+            width: 100%; max-width: 440px; max-height: 85vh;
+            border: 1px solid var(--border); display: flex; flex-direction: column;
         }
 
-        .scroll-content {
-            overflow-y: auto;
-            padding-right: 4px;
-        }
-
+        .scroll-content { overflow-y: auto; padding-right: 4px; }
         .scroll-content::-webkit-scrollbar { width: 3px; }
-        .scroll-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
 
         .field { margin-bottom: 24px; }
         .label-row { display: flex; align-items: center; margin-bottom: 10px; }
         label { font-size: 11px; color: var(--text-dim); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
 
-        input {
-            width: 100%;
-            padding: 16px;
-            background: #2c2c2e;
-            border: 1px solid transparent;
-            border-radius: 16px;
-            font-size: 18px;
-            font-weight: 600;
-            color: white;
-            outline: none;
-            transition: 0.2s;
+        .hint {
+            width: 18px; height: 18px; background: #3c4043; color: #fff;
+            border-radius: 50%; font-size: 10px; margin-left: 8px;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            font-weight: 800;
         }
 
-        input:focus { border-color: var(--accent-blue); background: #000000; }
+        input {
+            width: 100%; padding: 16px; background: #2c2c2e; border: 1px solid transparent;
+            border-radius: 16px; font-size: 18px; font-weight: 600; color: white;
+            outline: none; font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        input:focus { border-color: var(--accent-blue); background: #000; }
 
         .btn-calc {
-            width: 100%;
-            padding: 18px;
-            background: var(--text-main);
-            color: #000;
-            border: none;
-            border-radius: 100px;
-            font-size: 14px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .btn-calc:active { transform: scale(0.96); }
-
-        /* MODAL OVERLAY */
-        .overlay {
-            position: fixed; inset: 0;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(10px);
-            z-index: 1000; display: flex; align-items: center; justify-content: center;
-        }
-
-        .modal {
-            background: #1c1c1e; padding: 32px; border-radius: 32px;
-            width: 88%; max-width: 380px; border: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .btn-prime {
-            width: 100%; padding: 16px; background: var(--accent-blue);
-            color: white; border: none; border-radius: 100px; font-weight: 700;
+            width: 100%; padding: 18px; background: var(--text-main); color: #000;
+            border: none; border-radius: 100px; font-size: 14px; font-weight: 800;
+            cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         /* RESULTS */
@@ -184,9 +155,8 @@
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         .summary-card {
-            background: linear-gradient(145deg, #2c2c2e, #1c1c1e);
-            padding: 24px; border-radius: 24px;
-            border: 1px solid var(--border); margin-bottom: 20px;
+            background: rgba(255,255,255,0.03); padding: 24px; border-radius: 24px;
+            border: 1px solid var(--border); margin-bottom: 20px; text-align: center;
         }
 
         .total-val { font-size: 32px; font-weight: 800; letter-spacing: -1px; margin: 8px 0; }
@@ -194,6 +164,22 @@
     </style>
 </head>
 <body>
+
+    <div id="guide" class="overlay">
+        <div class="modal">
+            <h2>Selamat Datang di Kalkulator Pajak by Adien!</h2>
+            <p>Aplikasi ini dirancang untuk menghitung estimasi Pajak Penghasilan Anda secara akurat dengan UU No. 71 Tahun 2021. Jika Anda menemukan bug atau error, silakan hubungi: <b>raziqothmanalii@gmail.com</b></p>
+            <button class="btn-prime" onclick="closeM('guide')">Mulai</button>
+        </div>
+    </div>
+
+    <div id="info" class="overlay" style="display: none;">
+        <div class="modal">
+            <h2 style="text-align: left;">Tentang Tanggungan</h2>
+            <p>Tanggungan mencakup anggota keluarga sedarah yang menjadi tanggung jawab finansial Anda dan <b>tidak memiliki penghasilan sendiri</b> (seperti pasangan, anak, atau orang tua). Setiap jumlah tanggungan akan menambah batas Pendapatan Tidak Kena Pajak (PTKP) Anda.</p>
+            <button class="btn-prime" onclick="closeM('info')">Tutup</button>
+        </div>
+    </div>
 
     <header>
         <div class="header-left">
@@ -203,16 +189,8 @@
         <div class="island-container">
             <div class="island" id="island">SIAP HITUNG</div>
         </div>
-        <div style="width: 40px;"></div> </header>
-
-    <div id="guide" class="overlay">
-        <div class="modal">
-            <div style="font-size: 40px; margin-bottom: 15px;">📊</div>
-            <h2 style="margin-bottom: 15px;">Pajak Penghasilan</h2>
-            <p style="color: var(--text-dim); font-size: 14px; margin-bottom: 25px; line-height: 1.5;">Hitung estimasi PPh sesuai UU HPP terbaru secara instan dan rapi.</p>
-            <button class="btn-prime" onclick="closeM('guide')">Mulai Hitung</button>
-        </div>
-    </div>
+        <div style="width: 40px;"></div>
+    </header>
 
     <main>
         <div class="container">
@@ -223,7 +201,10 @@
                 </div>
 
                 <div class="field">
-                    <div class="label-row"><label>Tanggungan (PTKP)</label></div>
+                    <div class="label-row">
+                        <label>Jumlah Tanggungan</label>
+                        <div class="hint" onclick="openM('info')">?</div>
+                    </div>
                     <input type="number" id="tanggungan" value="0" min="0" max="3">
                 </div>
 
@@ -231,13 +212,11 @@
 
                 <div id="resArea" class="results">
                     <div class="summary-card">
-                        <span style="font-size: 11px; color: var(--text-dim); font-weight: 700; text-transform: uppercase;">Pajak Terutang</span>
+                        <span style="font-size: 11px; color: var(--text-dim); font-weight: 700; text-transform: uppercase;">Pajak Tahunan Terutang</span>
                         <div class="total-val" id="resTahun">Rp 0</div>
                         <div style="color: var(--accent-blue); font-size: 13px; font-weight: 600;">± <span id="resBulan"></span> / bulan</div>
                     </div>
-
                     <div id="tiers"></div>
-                    
                     <div class="row" style="border: none; margin-top: 10px;">
                         <span style="color: var(--text-dim);">PKP Akhir</span>
                         <span id="resPkp" style="font-weight: 700; color: var(--accent-purple);"></span>
@@ -248,6 +227,7 @@
     </main>
 
     <script>
+        function openM(id) { document.getElementById(id).style.display = 'flex'; }
         function closeM(id) { document.getElementById(id).style.display = 'none'; }
         
         function fmtRp(el) {
@@ -258,13 +238,14 @@
         function calc() {
             const isl = document.getElementById('island');
             isl.classList.add('island-active');
-            isl.innerText = "SEDANG MENGHITUNG...";
+            isl.innerText = "MENGHITUNG...";
 
             setTimeout(() => {
-                // Logika hitung sederhana (contoh)
                 document.getElementById('resArea').style.display = 'block';
-                document.getElementById('resTahun').innerText = "Rp 1.250.000"; // Dummy
-                document.getElementById('resBulan').innerText = "104.166"; // Dummy
+                // Placeholder hasil untuk demo
+                document.getElementById('resTahun').innerText = "Rp 1.250.000";
+                document.getElementById('resBulan').innerText = "104.166";
+                document.getElementById('resPkp').innerText = "Rp 25.000.000";
                 
                 isl.classList.remove('island-active');
                 isl.innerText = "HASIL SELESAI";
@@ -272,7 +253,6 @@
         }
     </script>
 </body>
-</html>
 
     <script>
         document.addEventListener('keydown', function(e) { if (e.key === 'Enter') calc(); });
