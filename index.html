@@ -123,7 +123,7 @@
     <div id="guide" class="overlay">
         <div class="modal">
             <h2>Selamat Datang di Kalkulator Pajak by Adien!</h2>
-            <p>Aplikasi ini dirancang untuk menghitung estimasi PPh 21 Anda secara akurat dengan sistem tarif progresif. Jika Anda menemukan bug atau error, silakan hubungi saya di: <b>raziqothmanalii@gmail.com</b></p>
+            <p>Aplikasi ini dirancang untuk menghitung estimasi Pajak Penghasilan Anda secara akurat dengan UU No. 71 Tahun 2021. Jika Anda menemukan bug atau error, silakan hubungi: <b>raziqothmanalii@gmail.com</b></p>
             <button class="btn-prime" onclick="closeM('guide')">Mulai</button>
         </div>
     </div>
@@ -131,14 +131,14 @@
     <div id="info" class="overlay" style="display: none; opacity: 0;">
         <div class="modal">
             <h2 style="text-align: left;">Tentang Tanggungan</h2>
-            <p>Tanggungan mencakup anggota keluarga sedarah yang menjadi tanggung jawab finansial Anda dan <b>tidak memiliki penghasilan sendiri</b> (seperti pasangan, anak, atau orang tua). Setiap jumlah tanggungan akan dikalikan dengan Rp 4.500.000 untuk menambah batas PTKP Anda.</p>
+            <p>Tanggungan mencakup anggota keluarga sedarah yang menjadi tanggung jawab finansial Anda dan <b>tidak memiliki penghasilan sendiri</b> (seperti pasangan, anak, atau orang tua). Setiap jumlah tanggungan akan menambah batas Pendapatan Tidak Kena Pajak (PTKP) Anda.</p>
             <button class="btn-prime" onclick="closeM('info')">Tutup</button>
         </div>
     </div>
 
     <div class="container">
         <div class="island" id="island">INPUT DATA</div>
-        <h1>PPh 21 Calculator</h1>
+        <h1>Kalkulator Pajak Penghasilan</h1>
 
         <div class="scroll-content">
             <div class="field">
@@ -203,7 +203,7 @@
             if (gaji <= 0) {
                 isl.innerText = "CEK INPUT";
                 isl.style.background = "#ea4335";
-                setTimeout(() => { isl.innerText = "TAX SYSTEM"; isl.style.background = "#2f2f30"; }, 2000);
+                setTimeout(() => { isl.innerText = "PERHITUNGAN SELESAI"; isl.style.background = "#2f2f30"; }, 2000);
                 return;
             }
 
