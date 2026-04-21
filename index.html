@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Kalkulator PPh by Adien</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -26,21 +26,23 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
-        }
+            /* overflow: hidden; ← HAPUS INI */
+            overflow-y: auto; /* GANTI JADI INI */
+            -webkit-overflow-scrolling: touch; /* Smooth scroll iOS */
+         }
 
         /* Header style dari Kalkulator Waris */
         header {
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
-            padding: 24px 24px;
+            padding: 16px 20px; /* Kurangi padding portrait */
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
+            position: relative; /* GANTI dari sticky */
             z-index: 100;
+            flex-shrink: 0; /* Jangan shrink */
         }
 
         .brand-title {
@@ -64,10 +66,9 @@
 
         /* Island warnanya disesuaikan tapi FUNGSI tetap sama */
         .island-container {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 18px;
+            position: relative; /* GANTI dari absolute */
+            margin: 0 auto;
+            margin-top: 8px;
             z-index: 200;
         }
 
@@ -158,22 +159,24 @@
         main { 
             flex: 1; 
             display: flex; 
-            align-items: center; 
+            align-items: flex-start; /* GANTI dari center */
             justify-content: center; 
-            padding: 20px; 
+            padding: 16px; /* Kurangi padding */
+            min-height: calc(100vh - 140px); /* Minimal height */
         }
 
         .container {
             background: var(--card); 
-            padding: 32px; 
-            border-radius: 24px;
+            padding: 24px; /* Kurangi dari 32px */
+            border-radius: 20px; /* Kurangi radius */
             width: 100%; 
-            max-width: 440px; 
-            max-height: 85vh;
+            max-width: 400px; /* Kurangi dari 440px */
+            max-height: none; /* HAPUS fixed height */
             border: 1px solid var(--border);
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.5);
             display: flex; 
             flex-direction: column;
+            height: 100%;
         }
 
         .scroll-content { 
@@ -253,6 +256,41 @@
             margin-top: 30px; 
             display: none; 
             animation: slideUp 0.5s ease-out forwards; 
+        }
+        @media screen and (max-height: 700px) {
+        header {
+            padding: 12px 16px;
+        }
+        
+        .container {
+            padding: 20px 16px;
+            margin: 8px;
+        }
+        
+        .field { 
+            margin-bottom: 20px; 
+        }
+        
+        input {
+            padding: 14px;
+            font-size: 16px; /* Pastikan keyboard trigger */
+        }
+        
+        .btn-calc {
+            padding: 16px;
+        }
+        .scroll-content { 
+            overflow-y: auto; 
+            padding-right: 4px; 
+            flex: 1;
+            -webkit-overflow-scrolling: touch;
+        }
+        .scroll-content::-webkit-scrollbar { 
+            width: 4px; 
+        }
+        .scroll-content::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
         }
         @keyframes slideUp { 
             from { opacity: 0; transform: translateY(20px); } 
