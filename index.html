@@ -36,10 +36,12 @@
         backdrop-filter: blur(20px);
         border-bottom: 1px solid var(--border);
         padding: 16px 20px;
-        display: flex;
+        display: flex;           /* Flex row */
         align-items: center;
+        justify-content: space-between;  /* ← INI KUNCI! Kiri-Tengah-Kanan */
         gap: 16px;
-        position: relative;
+        position: sticky;        /* Selalu atas */
+        top: 0;
         z-index: 100;
         flex-shrink: 0;
     }
@@ -245,15 +247,20 @@
         </div>
     </div>
 
-    <header>
-        <div class="header-left">
-            <span class="brand-title">Kalkulator Pajak <span style="color:var(--primary)">by Adien</span></span>
-        </div>
-        <div class="island-container">
-            <div class="island" id="island">SIAP HITUNG</div>
-        </div>
-        <div class="beta-badge">Beta Edition</div>
-    </header>
+<header>
+    <!-- 1. KIRI: Brand -->
+    <div class="header-left">
+        <span class="brand-title">Kalkulator Pajak <span style="color:var(--primary)">by Adien</span></span>
+    </div>
+    
+    <!-- 2. TENGAH: Island SIAP HITUNG -->
+    <div class="island-container">
+        <div class="island" id="island">SIAP HITUNG</div>
+    </div>
+    
+    <!-- 3. KANAN: Beta -->
+    <div class="beta-badge">Beta Edition</div>
+</header>
 
     <main>
         <div class="container">
