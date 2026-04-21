@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Warna dari Kalkulator Waris */
             --primary: #3b82f6;
             --bg: #0f172a;
             --card: #1e293b;
@@ -29,7 +28,6 @@
             position: relative;
         }
 
-        /* Header SIMPEL */
         header {
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(20px);
@@ -57,10 +55,7 @@
             header {
                 padding: 14px 12px 10px;
             }
-            
-            .brand-title {
-                font-size: 18px;
-            }
+            .brand-title { font-size: 18px; }
         }
 
         .brand-title {
@@ -82,20 +77,12 @@
         }
 
         @media (max-width: 768px) {
-            .beta-badge {
-                font-size: 9px;
-                padding: 3px 8px;
-            }
+            .beta-badge { font-size: 9px; padding: 3px 8px; }
         }
-
         @media (max-width: 480px) {
-            .beta-badge {
-                font-size: 8px;
-                padding: 2px 6px;
-            }
+            .beta-badge { font-size: 8px; padding: 2px 6px; }
         }
 
-        /* Island TRANSPARENT BG - MASUK BODY */
         .island {
             position: sticky;
             top: 80px;
@@ -128,37 +115,24 @@
             font-size: 12px;
         }
 
+        .island-error {
+            width: 140px;
+            height: 36px;
+            border-color: #ef4444;
+            background: #ef4444;
+            color: white;
+            font-size: 11px;
+        }
+
         @media (max-width: 768px) {
-            .island {
-                top: 100px;
-                width: 100%;
-                max-width: 200px;
-                height: 36px;
-                font-size: 11px;
-            }
-            
-            .island-active {
-                max-width: 220px;
-                height: 40px;
-            }
+            .island { top: 100px; width: 100%; max-width: 200px; height: 36px; font-size: 11px; }
+            .island-active { max-width: 220px; height: 40px; }
         }
-
         @media (max-width: 480px) {
-            .island {
-                top: 90px;
-                height: 32px;
-                font-size: 10px;
-                max-width: 180px;
-            }
-            
-            .island-active {
-                height: 38px;
-                max-width: 200px;
-                font-size: 11px;
-            }
+            .island { top: 90px; height: 32px; font-size: 10px; max-width: 180px; }
+            .island-active { height: 38px; max-width: 200px; font-size: 11px; }
         }
 
-        /* Hilang saat scroll ke bawah */
         .island.hide {
             opacity: 0;
             visibility: hidden;
@@ -173,8 +147,14 @@
             display: flex; 
             align-items: center; 
             justify-content: center;
-            opacity: 1; 
-            transition: opacity 0.3s ease;
+            opacity: 0; 
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
         }
 
         .modal {
@@ -252,7 +232,6 @@
                 margin-top: 16px;
             }
         }
-
         @media (max-width: 480px) {
             main {
                 padding: 12px 8px;
@@ -275,16 +254,10 @@
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 24px 20px;
-                border-radius: 20px;
-            }
+            .container { padding: 24px 20px; border-radius: 20px; }
         }
-
         @media (max-width: 480px) {
-            .container {
-                padding: 20px 16px;
-            }
+            .container { padding: 20px 16px; }
         }
 
         .scroll-content { 
@@ -335,10 +308,7 @@
         }
 
         @media (max-width: 480px) {
-            input {
-                font-size: 16px;
-                padding: 14px;
-            }
+            input { font-size: 16px; padding: 14px; }
         }
 
         input:focus { 
@@ -365,10 +335,7 @@
         }
 
         @media (max-width: 480px) {
-            .btn-calc {
-                padding: 16px;
-                font-size: 13px;
-            }
+            .btn-calc { padding: 16px; font-size: 13px; }
         }
 
         .btn-calc:hover {
@@ -397,9 +364,7 @@
         }
 
         @media (max-width: 480px) {
-            .summary-card {
-                padding: 20px 16px;
-            }
+            .summary-card { padding: 20px 16px; }
         }
 
         .total-val { 
@@ -411,9 +376,7 @@
         }
 
         @media (max-width: 480px) {
-            .total-val {
-                font-size: 28px;
-            }
+            .total-val { font-size: 28px; }
         }
 
         .row { 
@@ -427,6 +390,8 @@
 </head>
 <body>
 
+    <!-- MODAL GUIDE - FIXED -->
+    <div id="guide" class="overlay">
         <div class="modal">
             <h2>Selamat Datang di Kalkulator Pajak by Adien!</h2>
             <p>Aplikasi ini dirancang untuk menghitung estimasi Pajak Penghasilan Anda secara akurat dengan UU No. 71 Tahun 2021. Jika Anda menemukan bug atau error, silakan hubungi: <b>raziqothmanalii@gmail.com</b></p>
@@ -434,7 +399,8 @@
         </div>
     </div>
 
-    <div id="info" class="overlay" style="display: none; opacity: 0;">
+    <!-- MODAL INFO -->
+    <div id="info" class="overlay">
         <div class="modal">
             <h2 style="text-align: left;">Tentang Tanggungan</h2>
             <p>Tanggungan mencakup anggota keluarga sedarah yang menjadi tanggung jawab finansial Anda dan <b>tidak memiliki penghasilan sendiri</b> (seperti pasangan, anak, atau orang tua). Setiap jumlah tanggungan akan menambah batas Pendapatan Tidak Kena Pajak (PTKP) Anda.</p>
@@ -442,13 +408,13 @@
         </div>
     </div>
 
-    <!-- Header SIMPEL -->
+    <!-- Header -->
     <header>
         <span class="brand-title">Kalkulator Pajak <span style="color:var(--primary)">by Adien</span></span>
         <div class="beta-badge">Beta Edition</div>
     </header>
 
-    <!-- Island DIRECT di BODY - NO RECTANGLE BG -->
+    <!-- Island -->
     <div class="island" id="island">SIAP HITUNG</div>
 
     <main>
@@ -456,7 +422,7 @@
             <div class="scroll-content">
                 <div class="field">
                     <div class="label-row"><label>Penghasilan Netto / Tahun</label></div>
-                    <input type="text" id="dispGaji" placeholder="Rp 0" oninput="fmtRp(this)">
+                    <input type="text" id="dispGaji" placeholder="Rp 0" oninput="fmtRp(this)" value="">
                     <input type="hidden" id="rawGaji" value="0">
                 </div>
 
@@ -487,118 +453,155 @@
     </main>
 
     <script>
+        // Auto open guide modal
+        window.addEventListener('load', () => {
+            openM('guide');
+        });
+
         // Scroll hide/show island
         let lastScroll = 0;
         const island = document.getElementById('island');
         
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
-            
             if (currentScroll > lastScroll && currentScroll > 200) {
                 island.classList.add('hide');
             } else {
                 island.classList.remove('hide');
             }
-            
             lastScroll = currentScroll;
         });
 
-        // Global listener untuk Enter
+        // Global Enter key
         document.addEventListener('keydown', function(e) { 
             if (e.key === 'Enter') calc(); 
         });
 
         function openM(id) {
             const e = document.getElementById(id);
-            e.style.display = 'flex';
-            setTimeout(() => e.style.opacity = '1', 10);
+            e.classList.add('show');
         }
 
         function closeM(id) {
             const e = document.getElementById(id);
-            e.style.opacity = '0';
-            setTimeout(() => e.style.display = 'none', 300);
+            e.classList.remove('show');
         }
 
         function fmtRp(e) {
             let v = e.value.replace(/\D/g, '');
             document.getElementById('rawGaji').value = v;
             if (v) {
-                e.value = 'Rp' + new Intl.NumberFormat('id-ID').format(v);
+                e.value = 'Rp ' + new Intl.NumberFormat('id-ID').format(Number(v));
             } else {
                 e.value = '';
             }
         }
-
-        function calc() {
+                function calc() {
             const gaji = parseFloat(document.getElementById('rawGaji').value) || 0;
             const tang = parseInt(document.getElementById('tanggungan').value) || 0;
             const isl = document.getElementById('island');
 
+            // Validasi input
             if (gaji <= 0) {
+                isl.classList.remove('island-active');
+                isl.classList.add('island-error');
                 isl.innerText = "CEK INPUT";
-                isl.style.background = "#ef4444";
-                isl.style.color = "white";
-                setTimeout
-                () => { 
-                isl.innerText = "SIAP HITUNG"; 
-                isl.style.background = "var(--card)";
-                isl.style.color = "white";
+                
+                setTimeout(() => { 
+                    isl.classList.remove('island-error');
+                    isl.classList.remove('hide');
+                    isl.innerText = "SIAP HITUNG"; 
                 }, 2000);
-            return;
+                return;
             }
 
             // Show island saat calculate
-            isl.classList.remove('hide');
+            isl.classList.remove('hide', 'island-error');
             isl.classList.add('island-active');
             isl.innerText = "CALCULATING...";
 
             setTimeout(() => {
-                // Perhitungan PTKP
-                const ptkp = 54000000 + (tang * 4500000);
+                // Perhitungan PTKP (UU HPP 2021)
+                const ptkpBase = 54000000;  // PTKP dasar TK/0
+                const ptkpTambahan = 4500000; // Per tanggungan
+                const ptkp = ptkpBase + (tang * ptkpTambahan);
+                
                 let pkpSisa = Math.max(0, gaji - ptkp);
                 const pkpTotal = pkpSisa;
 
+                // Tarif progresif PPh 21 (UU HPP)
                 const lapisan = [
-                    { cap: 60000000, rate: 0.05, label: "Lapisan I (5%)" },
-                    { cap: 190000000, rate: 0.15, label: "Lapisan II (15%)" },
-                    { cap: 250000000, rate: 0.25, label: "Lapisan III (25%)" },
-                    { cap: 4500000000, rate: 0.30, label: "Lapisan IV (30%)" },
-                    { cap: Infinity, rate: 0.35, label: "Lapisan V (35%)" }
+                    { cap: 60000000, rate: 0.05, label: "Lapisan I (Rp0 - 60jt) 5%" },
+                    { cap: 190000000, rate: 0.15, label: "Lapisan II (60jt - 250jt) 15%" },
+                    { cap: 250000000, rate: 0.25, label: "Lapisan III (250jt - 500jt) 25%" },
+                    { cap: 5000000000, rate: 0.30, label: "Lapisan IV (500jt - 5M) 30%" },
+                    { cap: Infinity, rate: 0.35, label: "Lapisan V (> 5M) 35%" }
                 ];
 
                 let totalPajak = 0;
                 let htmlDetail = "";
-                const f = (n) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(n);
+                const f = (n) => new Intl.NumberFormat('id-ID', { 
+                    style: 'currency', 
+                    currency: 'IDR', 
+                    minimumFractionDigits: 0 
+                }).format(Math.round(n));
 
+                // Hitung pajak per lapisan
                 for (let lap of lapisan) {
                     if (pkpSisa <= 0) break; 
                     let porsi = Math.min(pkpSisa, lap.cap);
                     let pajak = porsi * lap.rate;
                     totalPajak += pajak;
-                    htmlDetail += `<div class="row"><span style="color:var(--text-dim)">${lap.label}</span><span style="font-weight: 600;">${f(pajak)}</span></div>`;
+                    htmlDetail += `<div class="row">
+                        <span style="color:var(--text-dim); font-size: 12px;">${lap.label}</span>
+                        <span style="font-weight: 600; color: var(--primary);">${f(pajak)}</span>
+                    </div>`;
                     pkpSisa -= porsi;
                 }
 
+                // Status jika nihil
+                if (totalPajak === 0) {
+                    htmlDetail = `<div class="row" style="border: none; padding: 20px 0;">
+                        <span style="color: var(--primary); font-size: 14px; font-weight: 700;">Status Pajak</span>
+                        <span style="color: var(--primary); font-size: 14px; font-weight: 700;">NIHIL</span>
+                    </div>`;
+                }
+
+                // Update hasil
                 document.getElementById('resArea').style.display = 'block';
-                document.getElementById('tiers').innerHTML = htmlDetail || `<div class="row"><span>Status</span><span>Nihil</span></div>`;
+                document.getElementById('tiers').innerHTML = htmlDetail;
                 document.getElementById('resPkp').innerText = f(pkpTotal);
                 document.getElementById('resTahun').innerText = f(totalPajak);
-                document.getElementById('resBulan').innerText = f(totalPajak/12);
+                document.getElementById('resBulan').innerText = f(totalPajak / 12);
 
+                // Island success
                 isl.innerText = "DONE ✨";
                 setTimeout(() => { 
                     isl.classList.remove('island-active'); 
                     isl.innerText = "SIAP HITUNG"; 
-                }, 1500);
+                }, 2000);
                 
-                // Smooth scroll yang lebih baik untuk mobile
-                const scrollContent = document.querySelector('.scroll-content');
-                scrollContent.scrollTo({ 
-                    top: 400, 
-                    behavior: 'smooth' 
-                });
-            }, 500);
+                // Smooth scroll ke hasil (responsif)
+                setTimeout(() => {
+                    const resArea = document.getElementById('resArea');
+                    const scrollContent = document.querySelector('.scroll-content');
+                    const resTop = resArea.offsetTop - 100;
+                    
+                    scrollContent.scrollTo({ 
+                        top: resTop, 
+                        behavior: 'smooth' 
+                    });
+                }, 300);
+
+            }, 800); // Delay lebih smooth
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('dispGaji').value = '';
+            document.getElementById('rawGaji').value = '0';
+            document.getElementById('tanggungan').value = '0';
+            document.getElementById('resArea').style.display = 'none';
         }
     </script>
 </body>
